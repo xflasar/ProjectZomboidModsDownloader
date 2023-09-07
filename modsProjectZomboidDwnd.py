@@ -49,9 +49,7 @@ def lookMods(mod_ids, gameAppId):
   non_mods = []
 
   # check for url choice
-  for m_id in mod_ids:
-    if '?id=' in m_id:
-      m_id = m_id.split('?id=')[1]
+  mod_ids = [m_id.split('?id=')[1] for m_id in mod_ids if '?id=' in m_id]
 
   directory = os.path.join(os.path.dirname(__file__), f'/steamcmd/steamapps/workshop/content/{gameAppId}/')
 
@@ -114,7 +112,7 @@ def download_mods(mod_ids):
       for m_id in mod_ids:
         if '?id=' in m_id:
           m_id = m_id.split('?id=')[1]
-      cmd.append("+workshop_download_item" + " 108600 " + mod_id.strip())
+        cmd.append("+workshop_download_item" + " 108600 " + m_id.strip())
   
 
   try:
